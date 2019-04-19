@@ -1,0 +1,72 @@
+<?xml version='1.0'?>
+<robot name="my_robot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="camera_holder" params="name parent origin_xyz origin_rpy">
+  
+  <joint type="fixed" name="${name}_joint">
+    <origin xyz="${origin_xyz}" rpy="${origin_rpy}"/>
+    <child link="${name}_link"/>
+    <parent link="${parent}"/>
+    <axis xyz="0 1 0" rpy="0 0 0"/>
+  </joint>
+
+  <link name="${name}_link">
+    <pose>0 0 0 0 0 0</pose>
+
+    <inertial>
+      <mass value="0.5"/>
+      <origin xyz="0.0 0 0" rpy=" 0 0 0"/>
+      <inertia
+          ixx="0.1" ixy="0" ixz="0"
+          iyy="0.1" iyz="0"
+          izz="0.1"
+      />
+    </inertial>
+
+    <collision name="holder_plate_collision">
+      <origin xyz="${holder_plate_xyz}" rpy=" 0 0 0"/> 
+      <geometry>
+        <box size="${holder_plate_w} ${holder_plate_l} ${holder_plate_h}" />
+      </geometry>
+    </collision>
+    
+    <collision name="holder_rod_1_collision">
+      <origin xyz="${holder_rod_1_xyz}" rpy=" 0 0 0"/> 
+      <geometry>
+        <cylinder radius="${holder_rod_r}" length="${holder_rod_l}" />
+      </geometry>
+    </collision>
+    
+    <collision name="holder_rod_2_collision">
+      <origin xyz="${holder_rod_2_xyz}" rpy=" 0 0 0"/> 
+      <geometry>
+        <cylinder radius="${holder_rod_r}" length="${holder_rod_l}" />
+      </geometry>
+    </collision>
+
+    <visual name="holder_plate_visual">
+      <origin xyz="${holder_plate_xyz}" rpy=" 0 0 0"/>
+      <geometry>
+        <box size="${holder_plate_w} ${holder_plate_l} ${holder_plate_h}" />
+      </geometry>
+    </visual>
+    
+    <visual name="holder_rod_1_visual">
+      <origin xyz="${holder_rod_1_xyz}" rpy=" 0 0 0"/> 
+      <geometry>
+        <cylinder radius="${holder_rod_r}" length="${holder_rod_l}" />
+      </geometry>
+    </visual>
+    
+    <visual name="holder_rod_2_visual">
+      <origin xyz="${holder_rod_2_xyz}" rpy=" 0 0 0"/> 
+      <geometry>
+        <cylinder radius="${holder_rod_r}" length="${holder_rod_l}" />
+      </geometry>
+    </visual>
+    
+  </link>
+
+  </xacro:macro>
+</robot>
+
